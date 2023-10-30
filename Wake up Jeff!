@@ -1,0 +1,23 @@
+from microbit import *
+import radio
+radio.on()
+# Define the QUESTION_MARK image
+QUESTION_MARK = Image('09990:90009:00990:00000:00900')
+
+while True:
+    # Check for incoming radio messages
+    incoming_message = radio.receive()
+    # If there is an incoming message
+    if incoming_message:
+        # Check if the message starts with "jeff:"
+        if incoming_message.startswith('jeff:'):
+            # If the message starts with "jeff:", wake up and display "?"
+            display.show(QUESTION_MARK)
+            radio.send('what?')
+            sleep(3000)
+            display.clear()
+        else:
+            # If it doesn't start with "jeff:", display "zzz"
+            #display.show(Image("00000:09990:09990:09990:00000"))
+            display.scroll('zzz')
+    
