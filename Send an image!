@@ -1,0 +1,12 @@
+from microbit import *
+import radio
+
+image = '99900:00090:99009:00909:90909'
+radio.on()
+while True:
+  radio.send(image)
+  sleep(5000)
+
+
+
+
