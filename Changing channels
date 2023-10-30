@@ -1,0 +1,12 @@
+from microbit import *
+import radio
+radio.on()
+radio.config(channel=6)
+while True:
+  message = radio.receive()
+  if button_a.was_pressed():
+    radio.config(channel=6)
+  if button_b.was_pressed():
+    radio.config(channel=9)
+  if message:
+    display.show(Image(message))
