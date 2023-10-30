@@ -1,0 +1,29 @@
+from microbit import *
+import radio
+
+radio.on()
+radio.config(power=2)
+
+MY_IMAGE = '09090:99999:99999:09990:00900'  # Heart
+ready = True  # Flag to track if the wave has been started
+
+def process_image(image):
+    display.show(Image(image))
+    radio.send(image)
+    sleep(700)
+    display.clear()
+
+while True:
+    if button_a.was_pressed() and ready == True:
+        # Start the wave
+        process_image(MY_IMAGE)
+        ready = False
+    elif radio.receive() and ready == True:
+        # Continue the wave if a message is received and the wave has started
+        sleep(500)  # Wait for 500ms
+        display.clear()
+        process_image(MY_IMAGE)
+        ready = False
+    elif button_b.was_pressed():
+        # Reset the state
+        ready = True
