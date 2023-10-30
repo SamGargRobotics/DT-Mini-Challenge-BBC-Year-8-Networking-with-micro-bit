@@ -1,0 +1,11 @@
+from microbit import *
+import radio
+
+radio.on()
+sent = False
+while True:
+  if button_a.was_pressed() and not sent:
+    radio.send('hi')
+    sent = True
+  if button_b.was_pressed():
+    sent = False  # Reset the state to allow sending again
